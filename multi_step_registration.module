@@ -1,0 +1,21 @@
+<?php
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function multi_step_registration_form_user_register_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  foreach (array_keys($form['actions']) as $action) {
+    if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+      $form['actions'][$action]['#submit'][] = 'multi_step_redirect_new_registered_users';
+    }
+  }
+}
+
+/*
+ * Redirection
+ */
+function multi_step_redirect_new_registered_users($form, FormStateInterface &$form_state) {
+  $uid = $form_state->getValues()['uid'];
+  $form_state->setRedirect('registration.step_1', ['user' => $uid]);
+}

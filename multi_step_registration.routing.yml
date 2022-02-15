@@ -1,0 +1,7 @@
+registration.step_1:
+ path: '/user-register/step-1'
+ defaults:
+   _title: 'Registration Process'
+   _form: '\Drupal\multi_step_registration\Form\RegistrationStep'
+ requirements:
+   _permission: 'access content'

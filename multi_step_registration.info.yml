@@ -1,0 +1,4 @@
+name: Multi Step Reg
+type: module
+description: 'Enables the creation of paragraphs entities.'
+core_version_requirement: ^8.8
