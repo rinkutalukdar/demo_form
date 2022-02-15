@@ -52,10 +52,11 @@ class RegistrationStep extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $uid = \Drupal::request()->query->get('user');
+    $user = \Drupal\user\Entity\User::load($uid);
+    // Set the field value new value.
+    $user->set('field_first_name', $form_state->getValue('customer_name'));
+    $user->save();
     drupal_set_message($this->t('@can_name ,Your application is being submitted!', array('@can_name' => $form_state->getValue('candidate_name'))));
-    // foreach ($form_state->getValues() as $key => $value) {
-    //   drupal_set_message($key . ': ' . $value);
-    // }
-
   }
 }
